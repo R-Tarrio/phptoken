@@ -16,7 +16,7 @@ class phptokenException extends Exception {
 				return "Token expired";
 			break;
     		default:
-                return "Invalid Token";
+                return $this->getMessage();
     		break;
     	}
         return $errorMsg;

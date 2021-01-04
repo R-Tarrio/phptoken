@@ -22,11 +22,11 @@ class phptoken
 		$this->json = $json;
 		$this->key = $key;
 		if(!$this->json && is_array($this->json)){
-			throw new Exception("invalid json", 1);
+			throw new phptokenException("invalid json", 1);
 		}
 
 		if(!$this->key){
-			throw new Exception("A key was not set", 1);
+			throw new phptokenException("A key was not set", 1);
 		}
 	}
 
@@ -40,25 +40,16 @@ class phptoken
 	public function decode()
 	{
 
-		try {
-			$this->valido();
+		$this->valido();
 
-			$json_a = explode(".", $this->json)[0];
-			$md5 = explode(".", $this->json)[1];
-			$json = hex2bin($json_a);
-			$json_arr = json_decode($json, true);
-			if( md5( bin2hex($json).$json_arr["init"].$this->key ) == $md5 ){
-				return $json;
-			}else{
-				return "Invalid";
-			}
-
-		} catch (phptokenException $e) {
-			return $e->errorMessage();
-		} catch (phptokenExceptionBlock $e) {
-			return $e->errorMessage();
-		} catch (phptokenExceptionExpired $e) {
-			return $e->errorMessage();
+		$json_a = explode(".", $this->json)[0];
+		$md5 = explode(".", $this->json)[1];
+		$json = hex2bin($json_a);
+		$json_arr = json_decode($json, true);
+		if( md5( bin2hex($json).$json_arr["init"].$this->key ) == $md5 ){
+			return $json;
+		}else{
+			return "Invalid";
 		}
 
 	}
