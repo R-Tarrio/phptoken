@@ -1,0 +1,19 @@
+{
+    "name": "siranta/phptoken",
+    "description": "Librería para generar token",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Rodrigo Tarrio",
+            "email": "rodrigotarrio2@gmail.com"
+        }
+    ],
+    "require": {
+        "jajo/jsondb": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "siranta\\": "src/"
+        }
+    }
+}
